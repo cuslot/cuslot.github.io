@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="kr">
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta charset="UTF-8" />
+        <title>CU 실시간 주소안내</title>
+        <style>
+            body {
+                font-weight: bold;
+                background: #000;
+            }
+            li {
+                list-style: none;
+            }
+            a {
+                text-decoration: none;
+            }
+
+            .background {
+                background: #000;
+                text-align: center;
+            }
+
+            figure {
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+
+                -webkit-transition: transform 700ms ease-in-out;
+                -moz-transition: transform 700ms ease-in-out;
+                -ms-transition: transform 700ms ease-in-out;
+                -o-transition: transform 700ms ease-in-out;
+                transition: transform 700ms ease-in-out;
+
+                transform: scale(0);
+            }
+            figure.active {
+                -webkit-animation: extend 0.75s;
+                animation: extend 0.75s;
+                animation-fill-mode: forwards;
+            }
+            figure::before {
+                position: absolute;
+                top: 0;
+                left: -75%;
+                z-index: 2;
+                display: block;
+                content: "";
+                width: 50%;
+                height: 100%;
+                background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+                background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+                -webkit-transform: skewX(-25deg);
+                transform: skewX(-25deg);
+            }
+
+            figure.animated::before {
+                -webkit-animation: shine 1.75s;
+                animation: shine 1.75s;
+            }
+            @-webkit-keyframes shine {
+                100% {
+                    left: 125%;
+                }
+            }
+            @keyframes shine {
+                100% {
+                    left: 125%;
+                }
+            }
+
+            @-webkit-keyframes extend {
+                100% {
+                    transform: scale(1);
+                }
+            }
+            @keyframes extend {
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            ul {
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                margin-bottom: 40px;
+            }
+            ul li {
+                width: 100%;
+                text-align: center;
+                font-size: 15px;
+                height: 75px;
+                line-height: 75px;
+                background-color: rgba(0, 0, 0, 0.8);
+                margin: 20px 0px;
+                border-radius: 0;
+
+                -webkit-transition: background 700ms ease-in-out;
+                -moz-transition: background 700ms ease-in-out;
+                -ms-transition: background 700ms ease-in-out;
+                -o-transition: background 700ms ease-in-out;
+                transition: background 700ms ease-in-out;
+                box-sizing: border-box;
+            }
+            ul li:hover {
+                border: 4px solid yellow;
+            }
+
+            ul li a {
+                width: 100%;
+                text-align: center;
+                font-size: 55px;
+                height: 75px;
+                line-height: 75px;
+                color: #f1f1f1;
+                font-family: arial;
+                display: block;
+            }
+
+            .logoasf {
+                position: absolute;
+                width: 450px;
+                height: 400px;
+                top: 70px;
+                left: 50%;
+                transform: translateX(-50%); 
+            }
+.link-position {
+    position: absolute;
+top: 525px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+            }
+            .link-01 {
+                
+                width: 364px;
+                height: 86px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 31px;
+                color: #fff;
+                filter: drop-shadow(2px 4px 1px black);
+                font-family: arial;
+                background: url(https://i.imgur.com/ChYhNSa.png) no-repeat;
+                background-size: 100% 100%;
+            }
+            .link-01:hover {
+                text-decoration: underline;
+            }
+            .link-02 {
+                
+                width: 364px;
+                height: 86px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 31px;
+                color: #fff;
+                filter: drop-shadow(2px 4px 1px black);
+                font-family: arial;
+                background: url(https://i.imgur.com/ChYhNSa.png) no-repeat;
+                background-size: 100% 100%;
+            }
+            .link-02:hover {
+                text-decoration: underline;
+            }
+
+            
+            @media only screen and (max-width: 800px) {
+                .dfndfn4, .logoasf {
+                    width: calc(100% - 16px);
+                }
+
+                ul li a {
+                    font-size: 35px;
+                }
+                .info-box {
+                    border: 2px solid #000;
+                }
+            }
+        </style>
+        <script>
+            var animate_timer = function () {
+                var element = document.getElementById("logo");
+                element.classList.remove("animated");
+
+                setTimeout(function () {
+                    element.classList.add("animated");
+                    setTimeout(animate_timer, 4000);
+                }, 500);
+            };
+
+            var onLoadCallback = function () {
+                setTimeout(function () {
+                    var element = document.getElementById("logo");
+                    element.classList.add("active");
+                }, 1500);
+
+                setTimeout(animate_timer);
+            };
+        </script>
+    </head>
+    <body style="margin: 0px; padding: 0px;" onload="onLoadCallback();">
+        <div class="background">
+            <img src="/back.png" alt="CU 주소 배경">
+            <div class="logoasf">
+                <figure id="logo" class="active animated">
+                    <img src="/logo.png" title="CU 주소" style="width: 100%;" />
+                </figure>
+            </div>
+            <div class="link-position">
+                <a class="link-01" href="http://cu-66.com" target="_blank">http://cu-66.com</a>
+                <a class="link-02" href="http://cu-77.com" target="_blank">http://cu-77.com</a>
+            </div>
+        </div>
+    </body>
+</html>
+
